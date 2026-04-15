@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  web01:
+    build: ./web
+    container_name: web_01
+    ports:
+      - "4001:80"
+    networks:
+      - mi_red
+    depends_on:
+      - api01
+
+  api01:
+    build: ./src/api  
+    container_name: api_01
+    ports:
+      - "4002:8080"   
+    networks:
+      - mi_red
+    depends_on:
+      - bd01
+
+  bd01:
+    image: postgres:15-alpine
+    container_name: bd_01
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: rootpassword
+      POSTGRES_DB: db_01
+    ports:
+      - "4003:5432"
+    networks:
+      - mi_red
+
+networks:
+  mi_red:
+    driver: bridge
