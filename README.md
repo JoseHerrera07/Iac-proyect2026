@@ -37,4 +37,6 @@ Para apagar y eliminar todos los contenedores y redes creadas, ejecuta:
 
    terraform destroy -auto-approve
 
+   dentro de la carpeta de terraform
+
    
